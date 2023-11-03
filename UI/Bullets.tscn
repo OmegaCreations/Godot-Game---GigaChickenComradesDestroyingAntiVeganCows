@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvh6ku2cteafx"]
+
+[ext_resource type="Script" path="res://UI/Bullets.gd" id="1_jl3gi"]
+
+[node name="Bullets" type="CanvasGroup"]
+script = ExtResource("1_jl3gi")

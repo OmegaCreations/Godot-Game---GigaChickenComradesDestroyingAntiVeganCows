@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://orio76ynreno"]
+
+[ext_resource type="Script" path="res://interactions/Special Key Interaction Area/interaction area/interaction_area.gd" id="1_vt35o"]
+
+[node name="InteractionArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_vt35o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8sej1u6pvwgh"]
+
+[ext_resource type="Texture2D" uid="uid://dl73720qh0lcf" path="res://assets/Characters/Free Chicken Sprites.png" id="1_5l7og"]
+[ext_resource type="Script" path="res://Objects/Projectile.gd" id="1_a32yd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8q6gm"]
+radius = 5.0
+
+[node name="Projectile" type="CharacterBody2D"]
+top_level = true
+collision_layer = 8
+collision_mask = 17
+script = ExtResource("1_a32yd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5l7og")
+hframes = 4
+vframes = 2
+frame = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_8q6gm")
+
+[node name="Rotation" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="TTL" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Rotation" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TTL" to="." method="_on_ttl_timeout"]

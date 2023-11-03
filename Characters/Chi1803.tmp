@@ -1,0 +1,124 @@
+[gd_scene load_steps=14 format=3 uid="uid://dt8f0fh6w30xd"]
+
+[ext_resource type="Texture2D" uid="uid://dl73720qh0lcf" path="res://assets/Characters/Free Chicken Sprites.png" id="1_2pcao"]
+[ext_resource type="Script" path="res://Characters/Chicken.gd" id="1_bhxs2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tj1c1"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_4vgds"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_57puc"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_a3k1x"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bokru"]
+_data = {
+"Idle": SubResource("Animation_57puc"),
+"RESET": SubResource("Animation_4vgds"),
+"Walk": SubResource("Animation_a3k1x")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o1xnh"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0mo7t"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w2t6i"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0w4y1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n0w77"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sferp"]
+states/Idle/node = SubResource("AnimationNodeAnimation_o1xnh")
+states/Idle/position = Vector2(337, 100)
+states/Walk/node = SubResource("AnimationNodeAnimation_0mo7t")
+states/Walk/position = Vector2(506, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_w2t6i"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_0w4y1"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_n0w77")]
+
+[node name="Chicken" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_bhxs2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2pcao")
+hframes = 4
+vframes = 2
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_tj1c1")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_max_distance = 400.0
+avoidance_enabled = true
+radius = 400.0
+debug_path_custom_color = Color(0.572549, 0.152941, 0.160784, 1)
+debug_path_custom_point_size = 5.05
+debug_path_custom_line_width = 1.76
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bokru")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_sferp")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

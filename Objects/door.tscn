@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://3c7skjyvtexy"]
+
+[ext_resource type="Texture2D" uid="uid://dcwt1tqtxyuxy" path="res://assets/Tilesets/Wooden House.png" id="1_brb8w"]
+[ext_resource type="PackedScene" uid="uid://orio76ynreno" path="res://interactions/Special Key Interaction Area/interaction area/interaction_area.tscn" id="2_ahvqs"]
+[ext_resource type="Script" path="res://Objects/door.gd" id="2_irg1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10c0k"]
+size = Vector2(16, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwlvu"]
+size = Vector2(32, 39)
+
+[node name="Door" type="Sprite2D"]
+position = Vector2(0, -2)
+texture = ExtResource("1_brb8w")
+vframes = 4
+frame = 1
+region_enabled = true
+region_rect = Rect2(48, 0, 16, 64)
+script = ExtResource("2_irg1u")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_10c0k")
+
+[node name="InteractionArea" parent="." instance=ExtResource("2_ahvqs")]
+action_name = "open_door"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_iwlvu")

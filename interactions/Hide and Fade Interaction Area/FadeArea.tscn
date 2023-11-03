@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds5g3elm2ruj6"]
+
+[ext_resource type="Script" path="res://interactions/Hide and Fade Interaction Area/FadeArea.gd" id="1_ps3dh"]
+
+[node name="FadeArea" type="Area2D"]
+script = ExtResource("1_ps3dh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
