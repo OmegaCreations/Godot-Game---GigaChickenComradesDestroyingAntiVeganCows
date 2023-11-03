@@ -1,9 +1,9 @@
 extends Panel
 
 var time : float = 60
-var minutes : int = 0
-var seconds : int = 0
-var msec : int = 0
+var minutes : float = 0
+var seconds : float = 0
+var msec : float = 0
 
 func _process(_delta):
 	time = $Timer.time_left

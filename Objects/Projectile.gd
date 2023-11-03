@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var projectile_speed = 2
+@export var projectile_speed = 4
 @export var direction : Vector2 = Vector2.ZERO
 
 # Getters

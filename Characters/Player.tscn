@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Characters/Player.gd" id="1_2wp00"]
 [ext_resource type="Texture2D" uid="uid://dslk662wd3dpw" path="res://assets/Characters/Basic Charakter Spritesheet.png" id="2_n0qxi"]
-[ext_resource type="Texture2D" uid="uid://vn31f8l14n8e" path="res://assets/Objects/cursor.png" id="3_dg5hv"]
+[ext_resource type="Texture2D" uid="uid://wy5ehw6evly5" path="res://assets/Characters/gun_1.png" id="3_sjavp"]
 [ext_resource type="AudioStream" uid="uid://cjdg5d6l3b45s" path="res://assets/Sounds/Effects/shoot.mp3" id="4_tjx38"]
 [ext_resource type="AudioStream" uid="uid://7wouwvmopwk6" path="res://assets/Sounds/Effects/empty.mp3" id="5_bx46t"]
 
@@ -239,7 +239,7 @@ states/Walk/position = Vector2(532, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_oudvb"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_lu1ui"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_ebyq0")]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_layer = 19
+collision_layer = 2
 collision_mask = 19
 script = ExtResource("1_2wp00")
 
@@ -268,8 +268,9 @@ parameters/Walk/blend_position = Vector2(-0.0226171, -0.763756)
 [node name="Marker2D" type="Marker2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
-position = Vector2(17, 0)
-texture = ExtResource("3_dg5hv")
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("3_sjavp")
+offset = Vector2(10, 2.5)
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_tjx38")

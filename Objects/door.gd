@@ -1,7 +1,6 @@
 extends Sprite2D
 
 @onready var interaction_area : InteractionArea = $InteractionArea
-@onready var sprite = $Sprite2D
 @onready var collision = $StaticBody2D/CollisionShape2D
 
 func _ready():

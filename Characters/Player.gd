@@ -12,7 +12,6 @@ const projectilePath = preload("res://Objects/Projectile.tscn")
 # Getters
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
-@onready var audio_player = $AudioStreamPlayer2D
 @onready var shoot_sound_player = $ShootSound
 @onready var empty_sound_player = $EmptySound
 
@@ -23,6 +22,14 @@ func _ready():
 func _physics_process(_delta):
 	# Shooting marker position as mouse
 	$Marker2D.look_at(get_global_mouse_position())
+	
+	# Gun sprite rotation
+	var ang = rad_to_deg((get_global_mouse_position() - $Marker2D/Sprite2D.global_position).angle())
+	if abs(ang) > 90:
+		$Marker2D/Sprite2D.flip_v = true
+	elif ang < 90:
+		$Marker2D/Sprite2D.flip_v = false
+	
 	
 	# Shoot input
 	if Input.is_action_just_pressed("shoot"):

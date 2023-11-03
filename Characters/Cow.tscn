@@ -85,7 +85,7 @@ size = Vector2(21, 10)
 [node name="Cow" type="CharacterBody2D" groups=["enemy"]]
 position = Vector2(0, -5)
 collision_layer = 16
-collision_mask = 3
+collision_mask = 19
 script = ExtResource("1_3gws0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
